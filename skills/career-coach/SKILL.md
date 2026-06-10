@@ -24,7 +24,7 @@ description: Career development coach for executing your job search plan. Use fo
 
 ## 文档地图 · Document Reference Map
 
-所有计划文档都在 `~/career-plan/`。教练对话时按需读取，不要预加载全部。
+所有计划文档都在 `~/career-plan/`。教练对话时按需读取，不要预加载全部。追踪文件路径均为 `~/career-plan/tracking/`。
 
 ### 核心计划文档
 
@@ -58,11 +58,11 @@ description: Career development coach for executing your job search plan. Use fo
 
 1. **加载状态**：Read `tracking/每日状态.md` 和 `tracking/漏斗记录表.md`
 2. **检查连续性**：
-   - 昨天的三件事完成了吗？最后一次 check-out 是哪天？
+   - 昨天是否有 check-out 记录？（检查每日状态的上次复盘日期）
    - 连续执行天数是多少？
    - 如果昨天没有 check-out 记录 → 问用户是否补填漏斗数字
    - 如果连续 3+ 天没有执行 → 触发中断三天警报（见闸门逻辑）
-3. **确认今日三件事**：如果用户提供了（作为参数或对话），写入每日状态。如果没提供，追问：「今天必须完成的 3 件事是什么？」
+3. **确认今日三件事**：如果用户提供了（作为参数或对话），写入每日状态的「今日三件事」栏。如果没提供，追问：「今天必须完成的 3 件事是什么？」
 4. **提醒当前阶段重点**：
    - 第 1 周 → 「本周唯一目标：简历每一行经得起 3 分钟追问」
    - 第 2 周 → 「同时堵『落地细节』和『算法』两个漏点」
@@ -303,12 +303,15 @@ description: Career development coach for executing your job search plan. Use fo
 3. 对应的计划文档章节（不要读全文，读需要的那个节）
 4. `tracking/周复盘记录.md` — 仅在周复盘模式下
 
-### 写入状态（在 check-out 和 review 模式中）
+### 写入状态（在 check-in、check-out 和 review 模式中）
 
 更新 `tracking/每日状态.md`：
+- 今日三件事（check-in 时写入）
+- 最后签到日期（check-in 时写入）
 - 连续执行天数（check-out 时 +1）
 - 今日漏斗数字
 - 今日时间块执行情况
+- 最后签退日期（check-out 时写入）
 - 当前周次（周复盘时 +1）
 - 昨日调整项（check-out 时填入）
 - 闸门状态
