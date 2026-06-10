@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/YOUR_USERNAME/.claude/skills/**)",
+      "Read(//Users/YOUR_USERNAME/.claude/**)",
+      "Read(//Users/YOUR_USERNAME/career-plan/**)",
+      "Write(//Users/YOUR_USERNAME/career-plan/tracking/**)",
+      "Bash(git://Users/YOUR_USERNAME/career-plan/**)",
+      "Bash(ls://Users/YOUR_USERNAME/career-plan/**)"
+    ]
+  }
+}
