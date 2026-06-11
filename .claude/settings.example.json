@@ -7,10 +7,12 @@
       "Write(//Users/YOUR_USERNAME/career-plan/tracking/**)",
       "Write(//Users/YOUR_USERNAME/career-plan/*.md)",
       "Write(//Users/YOUR_USERNAME/career-plan/profile/**)",
+      "Write(//Users/YOUR_USERNAME/career-plan/archive/**)",
       "Bash(git://Users/YOUR_USERNAME/career-plan/**)",
       "Bash(ls://Users/YOUR_USERNAME/career-plan/**)",
       "Bash(mkdir://Users/YOUR_USERNAME/career-plan/**)",
-      "Bash(test://Users/YOUR_USERNAME/career-plan/**)"
+      "Bash(test://Users/YOUR_USERNAME/career-plan/**)",
+      "Bash(cp://Users/YOUR_USERNAME/career-plan/**)"
     ]
   }
 }
