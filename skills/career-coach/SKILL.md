@@ -48,6 +48,7 @@ description: Career development coach for executing your job search plan. Use fo
 2. 模式五（决策支持）默认不读取 `profile/`；若用户提供了简历/JD 作为上下文，可以分析但不自动关联 profile 文件
 3. 模式六（内容诊断）可按需读取 `profile/` 下全部文件，但分析结果不得覆盖预先承诺规则
 4. 按需诊断数据只服务于当前会话，不写入追踪文件或长期状态
+5. 诊断会话结束后，下次进入执行模式时不自动加载任何 profile 文件或之前的诊断结论——两个引擎的上下文空间不共享
 
 ---
 
@@ -87,8 +88,6 @@ description: Career development coach for executing your job search plan. Use fo
 ## 会话模式 · Session Modes
 
 教练支持六种会话模式。用户通过对应的 slash command 进入，教练从上下文推断当前模式。
-
-模式一～四由**执行引擎**驱动，只读默认状态数据。模式五由**执行引擎**主导，可按需参考用户提供的决策上下文。模式六由**诊断引擎**驱动，独立于执行引擎运行。
 
 模式一～四由**执行引擎**驱动，只读默认状态数据。模式五由**执行引擎**主导，可按需参考用户提供的决策上下文。模式六由**诊断引擎**驱动，独立于执行引擎运行。
 
@@ -262,7 +261,7 @@ description: Career development coach for executing your job search plan. Use fo
    - **这是一个可逆还是不可逆的决定？**
    - **建议**（明确标注这是建议，不违背已有规则）
 
-**重要**：如果用户预先承诺的规则已经给出了答案（如「第 6 周约面率无改善 → 扩地域 + 降薪」），教练必须指出这一点，然后问用户是否要改变原来的规则。
+**重要**：模式五默认读取漏斗数据和规则文档。若诊断引擎已有输出（用户之前执行过 `/career-diagnose`），用户需在决策会话中手动复述诊断结论——系统不自动跨模式传递诊断上下文。
 
 ### 模式六 · 内容诊断 (Content Diagnostic)
 
@@ -402,10 +401,12 @@ description: Career development coach for executing your job search plan. Use fo
 - 按用户的诊断范围选择 `profile/` 下对应文件
 - **不预加载全部 profile 文件**——按用户指定问题读取相关文件
 - 同时读取 `tracking/漏斗记录表.md` 关联内容问题与数字
+- **注意**：诊断结论不跨会话持久化——下次签到、签退、周复盘不会自动加载之前的诊断结果。用户如需在决策中使用诊断结论，应在 `/career-decide` 中手动复述
 
 **决策支持模式（模式五）**：
 - 默认读取漏斗数据和相关计划文档章节
 - 不主动读取 `profile/`；若用户已提供简历/JD 作为会话上下文，可以在当前会话中分析但不自动关联 profile 文件
+- 如果用户之前执行过 `/career-diagnose`，用户需要在当前对话中手动复述诊断结论——系统不自动跨模式传递诊断上下文
 
 ### 写入状态（在 check-in、check-out 和 review 模式中）
 

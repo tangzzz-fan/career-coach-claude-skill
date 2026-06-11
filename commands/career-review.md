@@ -12,7 +12,7 @@ Invoke the career-coach skill in **weekly review mode (模式三·周复盘)**.
 5. Compare each metric against its threshold: ✅ ⚠️ ❌
 6. Calculate response rate, interview rate, conversion rate
 7. Show week-over-week trends (↑ ↓ →)
-8. Evaluate all gates (G1-G4, G6) — especially:
+8. Evaluate all gates (G1-G5) — especially:
    - 2 consecutive weeks with <3 interviews? → G1 early trigger
    - Week 4? → check dual-track experiment status
    - Week 6? → evaluate G2 (expand city + lower salary)

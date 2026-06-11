@@ -4,7 +4,10 @@
 
 ## 这是什么？
 
-**Career Coach** 是一个 Claude Code 自定义 skill，它会读取你的求职计划文档和追踪数据，像一个严格的教练一样推动你执行——每日签到、晚间复盘、每周诊断、漏斗记录、决策支持。
+**Career Coach** 是一个 Claude Code 自定义 skill，它会读取你的求职计划文档和追踪数据，像一个严格的教练一样推动你执行。分为两层：
+
+- **执行引擎**（日常）：每日签到、晚间复盘、漏斗记录、周六周复盘、决策支持
+- **诊断引擎**（按需）：简历匹配、故事质量、JD 定位——仅在 `/career-diagnose` 中触发
 
 核心理念：
 - **调整只看每周六的漏斗数据，不看当天情绪**
@@ -20,11 +23,20 @@
 | `/career-record` | 快速记录一次投递/回复/约面事件 | 10 秒 |
 | `/career-review` | 周六周复盘：五项指标对照 + 趋势 + 闸门评估 | 15 分钟 |
 | `/career-decide` | 结构化决策支持：不替你决定，帮你分析 | 按需 |
+| `/career-diagnose` | 内容诊断：简历匹配、故事质量、JD 定位 | 5–8 分钟 |
 
-### 教练会主动检测
+### 架构：两个引擎
+
+Career Coach 将能力分为两层：
+
+- **执行引擎**（模式一～五，默认）：盯执行状态与数字偏差，不判断内容质量
+- **诊断引擎**（模式六，按需）：分析简历/JD/故事/面试反馈，不修改闸门规则
+
+执行引擎发现漏斗异常时，会提示是否需要触发诊断——但不会自动诊断。两个引擎的上下文空间不共享。
 
 - **5 道闸门**：现金预警、地域/薪资扩展、双轨再平衡、提前触发、中断警报等
 - **6 种反模式**：情绪化改策略、简历注水、拒绝算法面、用规划替代行动、自责螺旋、同时做太多
+- **执行/诊断隔离**：日常模式只读追踪数据，绝不自动加载简历；内容诊断只能在独立模式中触发
 
 ## 安装
 
@@ -46,6 +58,7 @@ cp commands/career-*.md ~/.claude/commands/
 
 ```bash
 mkdir -p ~/career-plan/tracking
+mkdir -p ~/career-plan/profile
 cp templates/每日状态.md ~/career-plan/tracking/
 cp templates/漏斗记录表.md ~/career-plan/tracking/
 cp templates/周复盘记录.md ~/career-plan/tracking/
@@ -97,17 +110,20 @@ cp templates/周复盘记录.md ~/career-plan/tracking/
 │       ├── career-checkout.md    # 晚间复盘
 │       ├── career-record.md      # 漏斗记录
 │       ├── career-review.md      # 周复盘
-│       └── career-decide.md      # 决策支持
+│       ├── career-decide.md      # 决策支持
+│       └── career-diagnose.md    # 内容诊断
 └── career-plan/                  # 你的计划文档（自己创建和维护）
     ├── 求职执行计划.md
     ├── 求职策略与定位.md
-    └── tracking/
-        ├── 每日状态.md           # 教练自动维护
-        ├── 漏斗记录表.md         # 教练自动维护
-        └── 周复盘记录.md         # 教练自动维护
-        ├── 每日状态.md           # 教练自动维护
-        ├── 漏斗记录表.md         # 教练自动维护
-        └── 周复盘记录.md         # 教练自动维护
+    ├── tracking/
+    │   ├── 每日状态.md           # 教练自动维护
+    │   ├── 漏斗记录表.md         # 教练自动维护
+    │   └── 周复盘记录.md         # 教练自动维护
+    └── profile/                  # （可选）按需诊断数据
+        ├── 简历主档.md           # 仅 /career-diagnose 读取
+        ├── 目标岗位JD.md
+        ├── 项目故事库.md
+        └── 面试反馈.md
 ```
 
 ## 使用示例
@@ -130,6 +146,9 @@ cp templates/周复盘记录.md ~/career-plan/tracking/
 
 # 做决定
 /career-decide 要不要接受目前唯一的offer还是继续面
+
+# 内容诊断
+/career-diagnose 为什么回复率这么低
 ```
 
 ## 原理
