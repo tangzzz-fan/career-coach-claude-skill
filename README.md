@@ -24,7 +24,7 @@
 在 Claude Code 对话中输入：
 
 ```bash
-/claude add-skill https://github.com/<org>/career-coach-claude-skill
+/claude add-skill https://github.com/tangzzz-fan/career-coach-claude-skill.git
 ```
 
 > **没有发布地址？** 可以先从本地仓库安装。克隆本仓库后，在仓库目录中打开 Claude Code，然后参考 [working-mechanism.md](docs/working-mechanism.md) 的开发安装步骤。
