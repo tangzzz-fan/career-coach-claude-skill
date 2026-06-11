@@ -5,8 +5,12 @@
       "Read(//Users/YOUR_USERNAME/.claude/**)",
       "Read(//Users/YOUR_USERNAME/career-plan/**)",
       "Write(//Users/YOUR_USERNAME/career-plan/tracking/**)",
+      "Write(//Users/YOUR_USERNAME/career-plan/*.md)",
+      "Write(//Users/YOUR_USERNAME/career-plan/profile/**)",
       "Bash(git://Users/YOUR_USERNAME/career-plan/**)",
-      "Bash(ls://Users/YOUR_USERNAME/career-plan/**)"
+      "Bash(ls://Users/YOUR_USERNAME/career-plan/**)",
+      "Bash(mkdir://Users/YOUR_USERNAME/career-plan/**)",
+      "Bash(test://Users/YOUR_USERNAME/career-plan/**)"
     ]
   }
 }
