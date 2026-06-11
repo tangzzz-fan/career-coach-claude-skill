@@ -58,9 +58,14 @@ If `.career-coach/workspace.json` does not exist, write:
     "jds": ["JD-*.md", "jd-*.*"],
     "stories": ["项目故事库.md"],
     "feedback": ["面试反馈-*.md"]
-  }
+  },
+  "file_map": {}
 }
 ```
+
+`file_map` is populated on first `/career-diagnose` run. Leave it as an empty object `{}` — the diagnostic mode will fill it after file auto-discovery and user confirmation.
+
+`diagnostic_file_patterns` serves as a fast-path fallback: if `file_map` is empty, the diagnostic mode scans by content first; if content scanning is inconclusive, fall back to glob matching against these patterns.
 
 Replace `{{TODAY}}` with today's date from `date +%Y-%m-%d`.
 

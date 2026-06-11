@@ -17,14 +17,14 @@ Career Coach 不是通用聊天提示词，而是一套运行在 Claude Code 中
 
 ```text
 工作区根目录/
-├── 简历-主赛道.md
-├── JD-01-字节.md
+├── 我的简历.md                # 随便命名
+├── JD-01-字节.md              # 符合推荐的会被快速匹配
 ├── 项目故事库.md
-├── 面试反馈-01.md
+├── 腾讯面试复盘.md            # 其他命名也完全可以
 ├── .claude/
 │   └── settings.json
 └── .career-coach/
-    ├── workspace.json
+    ├── workspace.json          # file_map 记录文件类型映射
     ├── 求职执行计划.md
     ├── 求职策略与定位.md
     ├── tracking/
@@ -40,6 +40,7 @@ Career Coach 不是通用聊天提示词，而是一套运行在 Claude Code 中
 - **全局能力，本地状态**：skill 只安装一次，但每个工作区各自独立
 - **最小路径侵入**：不创建 `~/career-plan`，也不把用户资料迁走
 - **状态隐藏，资料可见**：系统状态进入 `.career-coach/`，用户内容仍在可见层
+- **不要求改名**：文件类型由内容特征自动识别，首次诊断时写入 `workspace.json` 的 `file_map`
 
 ## 三层能力
 
@@ -73,16 +74,15 @@ Career Coach 不是通用聊天提示词，而是一套运行在 Claude Code 中
 - `/career-diagnose`
 
 输入：
-- `简历-*.md`
-- `JD-*.md`
-- `项目故事库.md`
-- `面试反馈-*.md`
+- 工作区根目录下的用户资料（任意命名，由内容特征自动识别类型）
 - `.career-coach/tracking/漏斗记录表.md`
 
 输出：
 - 内容缺口
 - 匹配偏差
 - 本周只改一项的建议
+
+**文件发现**：诊断模式不要求用户按固定规则命名。首次进入时扫描工作区，按内容特征将文件分类为简历/JD/故事库/面试反馈，经用户确认后写入 `workspace.json` 的 `file_map`，后续直接复用。
 
 ### 3. 收官层
 
@@ -147,10 +147,12 @@ flowchart LR
 | `.career-coach/tracking/每日状态.md` | skill | 今日三件事、连续执行天数、闸门状态 | 签到、签退、周复盘 |
 | `.career-coach/tracking/漏斗记录表.md` | skill | 投递/回复/约面/面试的唯一事实来源 | 记录、复盘、诊断、收官 |
 | `.career-coach/tracking/周复盘记录.md` | skill | 周趋势、异常信号、下周调整项 | 周复盘、收官 |
-| `简历-*.md` | 用户 | 简历多版本 | 诊断、收官 |
-| `JD-*.md` | 用户 | 目标岗位要求 | 诊断、收官 |
-| `项目故事库.md` | 用户 | 面试故事素材 | 诊断、收官 |
-| `面试反馈-*.md` | 用户 | 面试中的真实反馈 | 诊断、收官 |
+| `简历-*` 等 | 用户 | 简历多版本（任意命名） | 诊断、收官 |
+| `JD-*` 等 | 用户 | 目标岗位要求（任意命名） | 诊断、收官 |
+| `*故事*` 等 | 用户 | 面试故事素材（任意命名） | 诊断、收官 |
+| `*面试*`/`*反馈*` 等 | 用户 | 面试中的真实反馈（任意命名） | 诊断、收官 |
+
+> 文件命名不强制。首次 `/career-diagnose` 时按内容特征自动识别类型并写入 `workspace.json`。
 
 ## 追踪与诊断边界
 
@@ -197,5 +199,5 @@ flowchart LR
 
 ## 相关阅读
 
-- [README](file:///Users/apple/Desktop/career-coach-claude-skill/README.md)
-- [SKILL.md](file:///Users/apple/Desktop/career-coach-claude-skill/skills/career-coach/SKILL.md)
+- [README](../README.md)
+- [SKILL.md](../skills/career-coach/SKILL.md)

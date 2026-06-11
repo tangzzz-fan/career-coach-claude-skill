@@ -1,35 +1,33 @@
 # Career Coach
 
 > 一个全局安装、局部运行的 Claude Code 求职教练 skill。
-> 你把 skill 安装到 `~/.claude`，然后在任意一个“简历 / JD / 面试资料文件夹”中打开 Claude Code，即可把当前文件夹升级为可执行的求职工作区。
+> 把 skill 安装到 `~/.claude`，然后在任意一个求职资料文件夹中打开 Claude Code，即可把当前文件夹升级为可执行的求职工作区。
 
 ## 快速开始
 
-### 1. 全局安装 skill
+### 1. 进入你的求职资料文件夹
 
-```bash
-mkdir -p ~/.claude/skills/career-coach ~/.claude/commands
-cp skills/career-coach/SKILL.md ~/.claude/skills/career-coach/
-cp -R templates ~/.claude/skills/career-coach/
-cp commands/career-*.md ~/.claude/commands/
-cp settings.example.json ~/.claude/settings.example.json
-```
-
-### 2. 进入你的求职资料文件夹
-
-例如当前文件夹已经有这些资料：
+在任意一个放了简历、JD、面试反馈的文件夹中打开 Claude Code。文件夹可以是这个样子：
 
 ```text
 我的求职资料/
-├── 简历-主赛道.md
-├── 简历-第二赛道.md
+├── 我的简历.md          # 随便叫什么
 ├── JD-01-字节.md
 ├── JD-02-腾讯.md
 ├── 项目故事库.md
-└── 面试反馈-01.md
+├── 面试反馈-01.md
+└── (其他文件也完全没关系)
 ```
 
-在这个文件夹中打开 Claude Code。
+### 2. 安装 skill
+
+在 Claude Code 对话中输入：
+
+```bash
+/claude add-skill https://github.com/<org>/career-coach-claude-skill
+```
+
+> **没有发布地址？** 可以先从本地仓库安装。克隆本仓库后，在仓库目录中打开 Claude Code，然后参考 [working-mechanism.md](docs/working-mechanism.md) 的开发安装步骤。
 
 ### 3. 运行初始化
 
@@ -37,20 +35,16 @@ cp settings.example.json ~/.claude/settings.example.json
 /career-init
 ```
 
-初始化后，当前文件夹会新增：
+初始化后，当前文件夹会新增两样东西：
 
 ```text
 我的求职资料/
-├── 简历-主赛道.md
-├── JD-01-字节.md
-├── 项目故事库.md
-├── 面试反馈-01.md
 ├── .claude/
-│   └── settings.json
+│   └── settings.json              # 自动写入权限配置
 └── .career-coach/
-    ├── workspace.json
-    ├── 求职执行计划.md
-    ├── 求职策略与定位.md
+    ├── workspace.json              # 工作区标记
+    ├── 求职执行计划.md             # 🔧 需要你填写
+    ├── 求职策略与定位.md           # 🔧 需要你填写
     ├── tracking/
     │   ├── 每日状态.md
     │   ├── 漏斗记录表.md
@@ -59,13 +53,14 @@ cp settings.example.json ~/.claude/settings.example.json
         └── raw/
 ```
 
-### 4. 填写两份规则文件
+**你的简历、JD、故事库、面试反馈不会被移动，也不会被改名。**
 
-只需要补这两份：
-- `.career-coach/求职执行计划.md`
-- `.career-coach/求职策略与定位.md`
+### 4. 填写两份规则文件（5–10 分钟）
 
-你的简历、JD、项目故事库、面试反馈继续保留在当前文件夹可见层，不会被移动到别处。
+打开 `.career-coach/` 下的这两份文件，把 `🔧` 标记的地方换成你的数字：
+
+- `.career-coach/求职执行计划.md` — 周指标底线、闸门触发条件
+- `.career-coach/求职策略与定位.md` — 目标岗位、赛道、薪资策略
 
 ### 5. 开始使用
 
@@ -112,9 +107,11 @@ cp settings.example.json ~/.claude/settings.example.json
 - 不会把状态文件写到工作区外面
 - 不会在日常执行模式里自动读取你的简历全文
 
-## 推荐命名
+## 文件命名
 
-为了让诊断更稳定，建议工作区里的资料按下面命名：
+**你不需要改名。** 诊断模式会自动扫描工作区中的文件，通过内容特征判断每个文件是简历、JD、故事库还是面试反馈。首次诊断时会把识别结果写入 `.career-coach/workspace.json`，后续直接复用。
+
+不过，如果你的文件恰好叫下面这样，匹配会更快：
 
 ```text
 简历-主赛道.md
