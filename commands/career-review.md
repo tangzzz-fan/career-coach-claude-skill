@@ -18,7 +18,10 @@ Invoke the career-coach skill in **weekly review mode (模式三·周复盘)**.
    - Week 6? → evaluate G2 (expand city + lower salary)
 9. Ask: cash status (for G3 cash gate)
 10. Produce the single adjustment item for next week
-11. Update tracking files: increment week number, reset daily counter
-12. Update `tracking/周复盘记录.md` with this week's data
+11. Capture anomaly signals — if reply rate or interview rate shows content-related patterns, flag for `/career-diagnose` but do NOT diagnose within this mode
+12. Update tracking files: increment week number, reset daily counter
+13. Update `tracking/周复盘记录.md` with this week's data
 
-Be thorough. This is the most important session of the week.
+Do NOT read `profile/` files. Do NOT perform content diagnosis here — that belongs to `/career-diagnose`.
+
+Be thorough on execution data. This is the most important execution session of the week.
