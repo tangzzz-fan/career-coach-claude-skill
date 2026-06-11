@@ -295,10 +295,10 @@ description: Career development coach for executing your job search plan. Use fo
 
 1. **确认诊断范围**：用户想诊断什么？简历匹配度 / 项目故事质量 / 面试反馈归因 / JD 定位偏差
 2. **按需读取**：
-   - `profile/简历主档.md` — （如涉及简历匹配或目标 JD 对照）
-   - `profile/目标岗位JD.md` — （如涉及定位或赛道匹配）
+   - `profile/简历-{版本}.md` — （如涉及简历匹配或目标 JD 对照，按赛道版本读取）
+   - `profile/JD-{编号}-{公司}.md` — （如涉及定位或赛道匹配，按公司编号读取）
    - `profile/项目故事库.md` — （如涉及故事质量）
-   - `profile/面试反馈.md` — （如涉及面试归因）
+   - `profile/面试反馈-{编号}.md` — （如涉及面试归因，按公司编号读取）
    - 当前漏斗数据 — 关联内容问题与数字表现
 3. **诊断输出**：
    - **内容缺口**：对比 JD 要求 vs 简历呈现，标记缺失或模糊的关键词/经验

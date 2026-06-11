@@ -201,7 +201,8 @@ Print a final checklist:
 2. 打开 ~/career-plan/求职策略与定位.md
    找到所有 🔧 标记，填入目标岗位和赛道
 
-3. （可选）把简历放到 ~/career-plan/profile/简历主档.md
+3. （可选）把简历放到 ~/career-plan/profile/简历-主赛道.md
+   把目标 JD 放到 ~/career-plan/profile/JD-01-公司名.md
    仅在需要内容诊断时使用 /career-diagnose
 
 4. 准备就绪后，运行 /career-checkin 开始第一天
