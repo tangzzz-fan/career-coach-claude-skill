@@ -32,6 +32,7 @@ Use `Bash(test -f <path> && echo "EXISTS" || echo "MISSING")` for each.
 ```
 mkdir -p ~/career-plan/tracking
 mkdir -p ~/career-plan/profile
+mkdir -p ~/career-plan/archive/raw
 ```
 
 ## Phase 4: Write tracking templates (only if missing)
@@ -180,6 +181,7 @@ Print a final checklist:
 目录结构：
   {✅/⏭️} ~/career-plan/tracking/
   {✅/⏭️} ~/career-plan/profile/
+  {✅/⏭️} ~/career-plan/archive/raw/
 
 追踪模板：
   {✅/⏭️} tracking/每日状态.md
@@ -216,7 +218,8 @@ Close with: "开始执行。运行 `/career-checkin` 进入你的第一天。"
 
 - **NEVER overwrite existing files.** Always check with `test -f <path>` before writing.
 - This is setup, not coaching. Do NOT invoke the career-coach skill persona.
-- Do NOT read or write `profile/` files. The `profile/` directory is for user content.
+- Do NOT read or write `profile/` files during init. The `profile/` directory is for user content.
+- `archive/` directory is created but left empty — `/career-closeout` populates it at job search endpoint.
 - Replace `{{TODAY}}` with today's date. Leave all other {{PLACEHOLDERS}} untouched.
 - Keep output concise — the user wants their environment ready, not a tutorial.
 
