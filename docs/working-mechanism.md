@@ -104,24 +104,24 @@ Career Coach 不是通用聊天提示词，而是一套运行在 Claude Code 中
 ```mermaid
 flowchart LR
     A[全局安装 skill] --> B[进入简历/JD 文件夹]
-    B --> C[/career-init]
+    B --> C["/career-init"]
     C --> D[生成 .career-coach/]
     C --> E[生成本地 .claude/settings.json]
     D --> F[填写两份规则文档]
     E --> F
-    F --> G[/career-checkin 开始使用]
+    F --> G["/career-checkin 开始使用"]
 ```
 
 ### 日常循环
 
 ```mermaid
 flowchart LR
-    A[/career-checkin] --> B[/career-record]
-    B --> C[/career-checkout]
-    C --> D[/career-review]
+    A["/career-checkin"] --> B["/career-record"]
+    B --> C["/career-checkout"]
+    C --> D["/career-review"]
     D --> E{内容异常?}
     E -->|否| A
-    E -->|是| F[/career-diagnose]
+    E -->|是| F["/career-diagnose"]
     F --> A
 ```
 
@@ -129,7 +129,7 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[tracking 数据] --> D[/career-closeout]
+    A[tracking 数据] --> D["/career-closeout"]
     B[规则文档] --> D
     C[简历/JD/面试反馈] --> D
     D --> E[求职总结报告]
