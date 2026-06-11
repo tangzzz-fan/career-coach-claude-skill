@@ -140,14 +140,17 @@ If `~/career-plan/求职策略与定位.md` does NOT exist, try to read `templat
 6. 目标公司清单 (empty table)
 7. 简历版本策略 (profile/ path references)
 
-## Phase 6: Settings file guidance
+## Phase 6: Bootstrap project settings
 
-Check if `.claude/settings.example.json` exists in the project directory (try `./.claude/settings.example.json`, then relative paths from skill location). If found:
+Check if `settings.example.json` exists in the current project directory first. If not found, check `~/.claude/settings.example.json` under `/Users/$USER/.claude/settings.example.json`. If either exists:
 
 1. Read it
 2. Get the user's actual username (from Phase 1 `$USER` or rerun `whoami`)
 3. Replace `YOUR_USERNAME` with the actual username throughout the JSON
-4. Print:
+4. Ensure project-level `.claude/` directory exists
+5. If project-level `.claude/settings.json` does NOT exist, write the substituted JSON to `.claude/settings.json`
+6. If `.claude/settings.json` already exists, do NOT overwrite it. Preserve the file and instead print the substituted JSON for manual merge
+6. Print:
 
 ```
 📋 你的个性化权限配置（把 YOUR_USERNAME 替换为了 $USER）：
@@ -156,18 +159,20 @@ Check if `.claude/settings.example.json` exists in the project directory (try `.
 {the complete JSON with actual username substituted}
 ```
 
-请将这段 JSON 添加到你的 settings 配置中：
-- 项目级别：复制到项目目录的 .claude/settings.json
-- 全局级别：合并到 ~/.claude/settings.local.json
+项目级设置处理结果：
+- 若 `.claude/settings.json` 原本不存在：已自动写入项目目录，后续命令可直接使用
+- 若 `.claude/settings.json` 已存在：未覆盖，请把上面的 JSON 手动合并到现有配置
 
 权限说明：
 - Read career-plan/** — 读取所有计划文档和追踪文件
 - Write career-plan/tracking/** — 教练写入每日状态、漏斗、周复盘
+- Write career-plan/profile/** — 仅收官模式读取/归档 profile 资料
+- Write career-plan/archive/** — 求职结束时写入 4 份资产和 raw 归档
 - Write career-plan/*.md — 初始化时写入根级别计划文档
-- Bash(mkdir ...) — 创建 career-plan 子目录
+- Bash(mkdir/test/cp ...) — 创建目录、校验存在性、归档原始文件
 ```
 
-If `.claude/settings.example.json` is not found, tell the user to manually configure permissions per the README and list the required permission entries.
+If no settings example file is found, tell the user to manually configure permissions per the README and list the required permission entries.
 
 ## Phase 7: Validation checklist
 
@@ -182,6 +187,7 @@ Print a final checklist:
   {✅/⏭️} ~/career-plan/tracking/
   {✅/⏭️} ~/career-plan/profile/
   {✅/⏭️} ~/career-plan/archive/raw/
+  {✅/⏭️} .claude/settings.json
 
 追踪模板：
   {✅/⏭️} tracking/每日状态.md

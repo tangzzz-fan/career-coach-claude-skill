@@ -8,10 +8,10 @@ Invoke the career-coach skill in **content diagnostic mode (模式六·内容诊
 **Your task**:
 1. Confirm the diagnostic scope with the user: resume match? story quality? interview feedback? JD positioning?
 2. Read relevant files from `profile/` ONLY as needed for this diagnostic — never preload all:
-   - `profile/简历主档.md`
-   - `profile/目标岗位JD.md`
+   - `profile/简历-*.md` (pick the version that matches the user's target track, e.g. `简历-主赛道.md`)
+   - `profile/JD-*.md` (pick the target company JD, e.g. `JD-01-字节.md`)
    - `profile/项目故事库.md`
-   - `profile/面试反馈.md`
+   - `profile/面试反馈-*.md` (pick the interview feedback that matches the company or round, e.g. `面试反馈-01.md`)
 3. Read current funnel data from `tracking/漏斗记录表.md` to connect content issues to numbers
 4. Output diagnosis:
    - Content gaps: JD requirements vs resume presentation

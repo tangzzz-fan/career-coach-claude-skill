@@ -49,7 +49,7 @@ Career Coach 将能力分为两层：
 flowchart TB
     subgraph 安装["1️⃣ 安装（一次性）"]
         direction LR
-        A1["复制 skill/commands 文件"] --> A2["配置 settings.json 权限"] --> A3["运行 /career-init"]
+        A1["clone 仓库"] --> A2["复制 commands/ skills/ 到 ~/.claude"] --> A3["运行 /career-init"] --> A4["自动写入项目 .claude/settings.json"]
     end
 
     subgraph 日常循环["2️⃣ 每日执行循环"]
@@ -223,37 +223,44 @@ flowchart LR
 
 ## 安装
 
-### 1. 复制文件
+### 1. clone 仓库
 
 ```bash
-# Skill 定义
-mkdir -p ~/.claude/skills/career-coach
-cp skills/career-coach/SKILL.md ~/.claude/skills/career-coach/
-
-# 命令文件
-mkdir -p ~/.claude/commands
-cp commands/career-*.md ~/.claude/commands/
+git clone <your-repo-url> career-coach-claude-skill
+cd career-coach-claude-skill
 ```
 
-### 2. 配置权限
+### 2. 安装到本地 `~/.claude`
 
-将 `.claude/settings.example.json` 中的内容添加到你的 `~/.claude/settings.json`（或项目 `.claude/settings.json`）中，把 `YOUR_USERNAME` 替换为你的 macOS 用户名（终端运行 `whoami` 查看）。
+`.claude/` 是本地运行目录，不随仓库提交。仓库里只保留源文件：`skills/`、`commands/`、`templates/` 和 `settings.example.json`。
+
+```bash
+mkdir -p ~/.claude/skills/career-coach ~/.claude/commands
+cp skills/career-coach/SKILL.md ~/.claude/skills/career-coach/
+cp commands/career-*.md ~/.claude/commands/
+cp settings.example.json ~/.claude/settings.example.json
+```
 
 ### 3. 运行初始化
 
-在 Claude Code 中运行：
+在仓库目录中打开 Claude Code，然后运行：
 
-```
+```bash
 /career-init
 ```
+
+### 4. 初始化会自动完成什么
 
 这个命令会自动：
 - 创建 `~/career-plan/` 完整目录结构（tracking/、profile/、archive/）
 - 写入三个追踪模板文件（每日状态、漏斗记录、周复盘）
 - 生成可填写的最小化计划文档（`求职执行计划.md`、`求职策略与定位.md`）
-- 输出你的个性化权限配置
+- 在项目内生成 `.claude/settings.json`（若不存在），把 `YOUR_USERNAME` 替换为当前 macOS 用户名
+- 若项目内已有 `.claude/settings.json`，则保留原文件并输出合并提示
 
 初始化完成后，按模板中的 🔧 标记填入你的个人信息（5–10 分钟），然后就可以开始使用了。
+
+`/career-init` 会优先读取当前仓库中的 `settings.example.json`；若当前目录没有该文件，则回退读取你本地的 `~/.claude/settings.example.json`。
 
 ## 使用示例
 
@@ -310,19 +317,31 @@ cp commands/career-*.md ~/.claude/commands/
 
 ```
 ~/
-├── .claude/
+├── career-coach-claude-skill/    # clone 下来的仓库（仅存源文件）
+│   ├── commands/
+│   │   ├── career-init.md
+│   │   ├── career-checkin.md
+│   │   ├── career-checkout.md
+│   │   ├── career-record.md
+│   │   ├── career-review.md
+│   │   ├── career-decide.md
+│   │   ├── career-diagnose.md
+│   │   └── career-closeout.md
 │   ├── skills/
 │   │   └── career-coach/
-│   │       └── SKILL.md          # 教练系统定义
-│   └── commands/
-│       ├── career-init.md        # 环境初始化
-│       ├── career-checkin.md     # 晨间签到
-│       ├── career-checkout.md    # 晚间复盘
-│       ├── career-record.md      # 漏斗记录
-│       ├── career-review.md      # 周复盘
-│       ├── career-decide.md      # 决策支持
-│       ├── career-diagnose.md    # 内容诊断
-│       └── career-closeout.md    # 求职收官
+│   │       └── SKILL.md
+│   ├── templates/
+│   │   ├── 求职执行计划.md
+│   │   ├── 求职策略与定位.md
+│   │   ├── 每日状态.md
+│   │   ├── 漏斗记录表.md
+│   │   └── 周复盘记录.md
+│   └── settings.example.json
+├── .claude/                      # 本地运行目录（不提交）
+│   ├── commands/
+│   ├── skills/
+│   ├── settings.example.json
+│   └── settings.json
 └── career-plan/                  # 你的计划文档（初始化自动生成）
     ├── 求职执行计划.md            # 规则、指标、阶段
     ├── 求职策略与定位.md          # 赛道、薪资、关键词
