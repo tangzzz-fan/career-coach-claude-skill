@@ -3,16 +3,13 @@
     "allow": [
       "Read(//Users/YOUR_USERNAME/.claude/skills/**)",
       "Read(//Users/YOUR_USERNAME/.claude/**)",
-      "Read(//Users/YOUR_USERNAME/career-plan/**)",
-      "Write(//Users/YOUR_USERNAME/career-plan/tracking/**)",
-      "Write(//Users/YOUR_USERNAME/career-plan/*.md)",
-      "Write(//Users/YOUR_USERNAME/career-plan/profile/**)",
-      "Write(//Users/YOUR_USERNAME/career-plan/archive/**)",
-      "Bash(git://Users/YOUR_USERNAME/career-plan/**)",
-      "Bash(ls://Users/YOUR_USERNAME/career-plan/**)",
-      "Bash(mkdir://Users/YOUR_USERNAME/career-plan/**)",
-      "Bash(test://Users/YOUR_USERNAME/career-plan/**)",
-      "Bash(cp://Users/YOUR_USERNAME/career-plan/**)"
+      "Read(WORKSPACE_PATH/**)",
+      "Write(WORKSPACE_PATH/.career-coach/**)",
+      "Write(WORKSPACE_PATH/.claude/**)",
+      "Bash(ls:WORKSPACE_PATH/**)",
+      "Bash(mkdir:WORKSPACE_PATH/**)",
+      "Bash(test:WORKSPACE_PATH/**)",
+      "Bash(cp:WORKSPACE_PATH/.career-coach/**)"
     ]
   }
 }

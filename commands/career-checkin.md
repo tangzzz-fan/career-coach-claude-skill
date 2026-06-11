@@ -5,13 +5,22 @@ argument-hint: (optional) your 3 things for today, e.g. "1.投递20个目标岗�
 
 Invoke the career-coach skill in **morning check-in mode (模式一·晨间启动)**.
 
+**Workspace rule**: treat the current folder as the user's job-search workspace.
+Read state only from:
+- `.career-coach/tracking/每日状态.md`
+- `.career-coach/tracking/漏斗记录表.md`
+
 **Your task**:
-1. Read `tracking/每日状态.md` and `tracking/漏斗记录表.md` to load current state
-2. Check execution continuity — any missed days? 3+ days gap → trigger G6 interruption alarm
+1. Read `.career-coach/tracking/每日状态.md` and `.career-coach/tracking/漏斗记录表.md`
+2. Check execution continuity — any missed days? 3+ days gap → trigger interruption alarm
 3. Record today's 3 things (from $ARGUMENTS, or ask if not provided)
 4. Remind of current phase focus (W1 resume de-watering, W2 ammo+algo, etc.)
 5. Report current week funnel progress vs thresholds
 6. Print the morning briefing and close with "开始执行"
+
+**Hard constraints**:
+- Do NOT automatically scan the workspace for resume/JD/story/interview-feedback files in this mode
+- Do NOT perform content diagnosis here — this mode is execution-only
 
 Keep it brief — the user needs to start executing, not chat. Target: 30 seconds to done.
 
